@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Shopping Cart</string>
+    <string name="add_shopping_cart">AddCart</string>
+    <string name="Logout_Image">Logout</string>
+</resources>
