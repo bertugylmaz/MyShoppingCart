@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Shopping Cart</string>
     <string name="add_shopping_cart">AddCart</string>
+    <string name="shopping_cart_info">Cart Info</string>
     <string name="back_button">Back</string>
     <string name="Logout_Image">Logout</string>
     <string name="product_name">Ürün Adı</string>
@@ -8,4 +9,5 @@
     <string name="add_product">Ürün Ekle</string>
     <string name="add_list">Listeye Ekle</string>
     <string name="clear_list">Clear Done's</string>
+
 </resources>

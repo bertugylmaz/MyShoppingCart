@@ -24,6 +24,7 @@ public class Main extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -31,7 +32,6 @@ public class Main extends AppCompatActivity {
 
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
