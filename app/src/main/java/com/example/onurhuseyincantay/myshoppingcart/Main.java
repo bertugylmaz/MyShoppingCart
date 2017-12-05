@@ -12,7 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class Main extends AppCompatActivity {
+
     private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +22,10 @@ public class Main extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        myToolbar.setTitle(R.string.app_name);getSupportActionBar().setDisplayShowTitleEnabled(false);
-        listView = (ListView) findViewById(R.id.list_view);
+        myToolbar.setTitle(R.string.app_name);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        listView = (ListView) findViewById(R.id.list_view);
     }
 
     @Override

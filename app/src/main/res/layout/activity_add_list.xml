@@ -14,7 +14,8 @@
         android:elevation="4dp"
         android:backgroundTint="@color/midnight_blue"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
