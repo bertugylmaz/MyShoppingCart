@@ -15,7 +15,6 @@
         android:backgroundTint="@color/midnight_blue"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
     <TextView
@@ -25,7 +24,6 @@
         android:layout_gravity="center"
         android:textColor="@color/White"
         android:id="@+id/toolbar_title"/>
-
 
     </android.support.v7.widget.Toolbar>
 
