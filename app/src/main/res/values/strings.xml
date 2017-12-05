@@ -7,4 +7,5 @@
     <string name="product_count">Ürün Miktarı</string>
     <string name="add_product">Ürün Ekle</string>
     <string name="add_list">Listeye Ekle</string>
+    <string name="clear_list">Clear Done's</string>
 </resources>

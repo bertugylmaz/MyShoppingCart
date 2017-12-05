@@ -30,15 +30,30 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/my_toolbar"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false">
 
-
     </ListView>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/list_view"
+        android:layout_margin="20dp">
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:text="@string/clear_list"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
