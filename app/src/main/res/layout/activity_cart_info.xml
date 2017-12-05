@@ -34,5 +34,5 @@
         android:layout_below="@id/my_toolbar"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"/>
-    
+
 </RelativeLayout>
