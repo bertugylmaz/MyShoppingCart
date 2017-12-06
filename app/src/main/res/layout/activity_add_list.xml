@@ -36,7 +36,7 @@
         android:layout_below="@id/my_toolbar"
         android:layout_margin="20dp"
         android:orientation="vertical">
-        
+
         <EditText
             android:id="@+id/productNameEditText"
             android:layout_width="match_parent"
