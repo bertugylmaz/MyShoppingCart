@@ -7,21 +7,21 @@ package com.example.onurhuseyincantay.myshoppingcart;
 public class ShoppingCart {
 
     public String productName;
-    public int productCount;
+    public String productCount;
     public String productType;
 
-    public ShoppingCart(String name, int count, String type){
+    public ShoppingCart(String name, String  count, String type){
         super();
         this.productName = name;
         this.productCount = count;
         this.productType = type;
     }
 
-    public void setProductCount(int productCount) {
+    public void setProductCount(String productCount) {
         this.productCount = productCount;
     }
 
-    public int getProductCount() {
+    public String getProductCount() {
         return productCount;
     }
 

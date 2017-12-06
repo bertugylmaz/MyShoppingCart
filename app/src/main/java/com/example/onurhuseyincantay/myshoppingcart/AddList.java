@@ -23,6 +23,7 @@ public class AddList extends AppCompatActivity {
     private Button addProductButton;
     private EditText productNameEditText;
     private EditText productCountEditText;
+    private String selectedType;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -44,7 +45,7 @@ public class AddList extends AppCompatActivity {
         typesDataForSpinner =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
         typesDataForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typesDataForSpinner);
-
+        final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.shoppingCarts);
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,9 @@ public class AddList extends AppCompatActivity {
                     Toast wrongToast = Toast.makeText(getApplicationContext(), "Boş alanları doldurunuzz", Toast.LENGTH_LONG);
                     wrongToast.show();
                 }else {
+                    GenericShoppingCart.shoppingCarts.add(new ShoppingCart(productNameEditText.getText().toString(),productCountEditText.getText().toString(),typeSpinner.getSelectedItem().toString()));
+                    shoppingCartAdapter.notifyDataSetChanged();
+
                     Toast completedToast = Toast.makeText(getApplicationContext(), "Ürün Eklendi", Toast.LENGTH_LONG);
                     completedToast.show();
                 }
