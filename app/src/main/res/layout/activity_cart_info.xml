@@ -15,6 +15,7 @@
         android:backgroundTint="@color/midnight_blue"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -29,10 +30,27 @@
     </android.support.v7.widget.Toolbar>
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/ListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/my_toolbar"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/ListView"
+        android:layout_margin="20dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:text="@string/clear_list"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

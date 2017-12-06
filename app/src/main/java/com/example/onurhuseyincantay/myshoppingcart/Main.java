@@ -8,12 +8,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class Main extends AppCompatActivity {
 
     private ListView listView;
+    private String[] itemData = {"Item 1","Item 2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,18 @@ public class Main extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         listView = (ListView) findViewById(R.id.list_view);
+        ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, android.R.id.text1, itemData);
+
+        listView.setAdapter(veriAdaptoru);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent shoppingCartInfoIntent = new Intent(Main.this, CartInfo.class);
+                startActivity(shoppingCartInfoIntent);
+            }
+        });
     }
 
     @Override
