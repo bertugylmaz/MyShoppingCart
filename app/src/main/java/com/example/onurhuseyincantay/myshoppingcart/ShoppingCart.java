@@ -10,7 +10,7 @@ public class ShoppingCart {
     public String productCount;
     public String productType;
 
-    public ShoppingCart(String name, String  count, String type){
+    public ShoppingCart(String name, String count, String type){
         super();
         this.productName = name;
         this.productCount = count;

@@ -57,6 +57,9 @@ public class AddList extends AppCompatActivity {
                     GenericShoppingCart.shoppingCarts.add(new ShoppingCart(productNameEditText.getText().toString(),productCountEditText.getText().toString(),typeSpinner.getSelectedItem().toString()));
                     shoppingCartAdapter.notifyDataSetChanged();
 
+                    productNameEditText.setText("");
+                    productCountEditText.setText("");
+
                     Toast completedToast = Toast.makeText(getApplicationContext(), "Ürün Eklendi", Toast.LENGTH_LONG);
                     completedToast.show();
                 }

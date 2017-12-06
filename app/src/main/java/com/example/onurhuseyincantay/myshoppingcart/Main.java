@@ -19,7 +19,7 @@ public class Main extends AppCompatActivity {
 
     private ListView listView;
     //private String[] itemData = {"Item 1","Item 2"};
-
+    ShoppingCartAdapter shoppingCartAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,31 +31,14 @@ public class Main extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         listView = (ListView) findViewById(R.id.list_view);
+        shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.shoppingCarts);
+    }
 
-        final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.shoppingCarts);
+    @Override
+    protected void onResume() {
+        super.onResume();
         listView.setAdapter(shoppingCartAdapter);
         shoppingCartAdapter.notifyDataSetChanged();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Intent shoppingCartInfoIntent = new Intent(Main.this, CartInfo.class);
-                //startActivity(shoppingCartInfoIntent);
-                View v = listView.getChildAt(i);
-                //checkedTextView.setOnClickListener(new View.OnClickListener() {
-                //  @Override
-                //    public void onClick(View view) {
-
-                //    }
-                //});
-
-                //GenericShoppingCart.shoppingCarts.remove(i);
-                //
-            }
-        });
-
-
-
     }
 
     @Override
