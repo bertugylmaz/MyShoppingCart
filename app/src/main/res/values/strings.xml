@@ -2,6 +2,7 @@
     <string name="app_name">My Shopping Cart</string>
     <string name="add_shopping_cart">AddCart</string>
     <string name="shoppingList_name">Liste Adı</string>
+    <string name="cart_name">Sepet Adı</string>
     <string name="shopping_cart_info">Cart Info</string>
     <string name="back_button">Back</string>
     <string name="Logout_Image">Logout</string>

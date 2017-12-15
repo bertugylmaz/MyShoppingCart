@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/back">
+    </ImageView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="250dp"
+            android:id="@+id/login_email"
+            android:hint="Email"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="250dp"
+            android:hint="Password"
+            android:singleLine="true"
+            android:id="@+id/login_passsword"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="fill"
+            android:layout_margin="10dp"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giriş"
+                android:layout_weight="1"
+                android:id="@+id/login_button"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kayıt Ol"
+                android:id="@+id/register_button"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

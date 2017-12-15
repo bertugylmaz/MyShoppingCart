@@ -7,19 +7,25 @@ import java.util.List;
  */
 
 public class ShoppingList {
-    private  String LıstId;
+    private String ListId;
+    private String name;
     private List<String> Items;
 
-    public String getLıstId() {
-        return LıstId;
+    public ShoppingList(String listId, List<String> items, String name) {
+        ListId = listId;
+        this.name = name;
+        Items = items;
+    }
+
+    public String getListId() {
+        return ListId;
     }
 
     public List<String> getItems() {
         return Items;
     }
 
-    public ShoppingList(String lıstId, List<String> items) {
-        LıstId = lıstId;
-        Items = items;
+    public String getName() {
+        return name;
     }
 }

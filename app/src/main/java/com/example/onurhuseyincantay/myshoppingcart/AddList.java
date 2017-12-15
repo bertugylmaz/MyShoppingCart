@@ -1,6 +1,7 @@
 package com.example.onurhuseyincantay.myshoppingcart;
 
 import android.annotation.SuppressLint;
+import android.service.autofill.Dataset;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+
+import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
+import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
+
+import java.util.Map;
 
 public class AddList extends AppCompatActivity {
 
@@ -45,7 +51,7 @@ public class AddList extends AppCompatActivity {
         typesDataForSpinner =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
         typesDataForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typesDataForSpinner);
-        final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.shoppingCarts);
+        final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.ItemLists);
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +60,14 @@ public class AddList extends AppCompatActivity {
                     Toast wrongToast = Toast.makeText(getApplicationContext(), "Boş alanları doldurunuzz", Toast.LENGTH_LONG);
                     wrongToast.show();
                 }else {
-                    GenericShoppingCart.shoppingCarts.add(new ShoppingCart(productNameEditText.getText().toString(),productCountEditText.getText().toString(),typeSpinner.getSelectedItem().toString()));
+                    String id = DataService.ds.itemsRef.push().getKey();
+                    String weight = productCountEditText.getText().toString() +" "+ typeSpinner.getSelectedItem().toString();
+                    String name = productNameEditText.getText().toString();
+
+                    Item item = new Item(id,name,weight);
+
+                    addItemAction(item);
+
                     shoppingCartAdapter.notifyDataSetChanged();
 
                     productNameEditText.setText("");
@@ -71,6 +84,10 @@ public class AddList extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public void addItemAction(Item item){
+        DataService.ds.itemsRef.child(item.getItemId()).updateChildren(item.toMap());
     }
 
 }

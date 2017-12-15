@@ -13,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+
+import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
+
 import java.util.List;
 
 /**
@@ -22,16 +25,16 @@ import java.util.List;
 public class ShoppingCartAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
-    private List<ShoppingCart> shoppingCartList;
+    private List<Item> ItemList;
 
-    public ShoppingCartAdapter(Activity activity, List<ShoppingCart> carts){
+    public ShoppingCartAdapter(Activity activity, List<Item> items){
         layoutInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        shoppingCartList = carts;
+        ItemList = items;
     }
 
     @Override
     public int getCount(){
-        return shoppingCartList.size();
+        return ItemList.size();
     }
 
     @Override
@@ -50,7 +53,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
         TextView nameTextView;
         TextView countTextView;
         Button removeButton;
-        ShoppingCart shoppingCart;
+        Item item;
         final int position = i;
 
         final ShoppingCartAdapter me = this;
@@ -59,15 +62,15 @@ public class ShoppingCartAdapter extends BaseAdapter {
         String type;
 
         row = layoutInflater.inflate(R.layout.shopping_list_cell, null);
-        shoppingCart = shoppingCartList.get(i);
+        item = ItemList.get(i);
 
         nameTextView = (TextView)row.findViewById(R.id.nameTextView);
         countTextView = (TextView)row.findViewById(R.id.countTextView);
         removeButton = (Button)row.findViewById(R.id.removeButton);
 
-        nameTextView.setText(shoppingCart.getProductName());
+        nameTextView.setText(item.getName());
 
-        type = shoppingCart.getProductCount() + " " + shoppingCart.productType;
+        type = item.getWeight() ;
         countTextView.setText(type);
 
         /*checkedTextView = (CheckedTextView)row.findViewById(R.id.checkedTextView);
@@ -95,7 +98,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
                         .setMessage("Are you sure you want to delete this entry?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                shoppingCartList.remove(position);
+                                ItemList.remove(position);
                                 me.notifyDataSetChanged();
                             }
                         })
@@ -121,12 +124,12 @@ public class ShoppingCartAdapter extends BaseAdapter {
         return layoutInflater;
     }
 
-    public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
-        this.shoppingCartList = shoppingCartList;
+    public void setShoppingCartList(List<Item> itemList) {
+        this.ItemList = itemList;
     }
 
-    public List<ShoppingCart> getShoppingCartList() {
-        return shoppingCartList;
+    public List<Item> getShoppingCartList() {
+        return ItemList;
     }
 
     public boolean alertDialog(View view){
