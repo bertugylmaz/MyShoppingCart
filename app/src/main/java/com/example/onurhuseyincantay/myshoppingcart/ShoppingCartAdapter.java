@@ -13,8 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,7 +70,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
         type = shoppingCart.getProductCount() + " " + shoppingCart.productType;
         countTextView.setText(type);
 
-        checkedTextView = (CheckedTextView)row.findViewById(R.id.checkedTextView);
+        /*checkedTextView = (CheckedTextView)row.findViewById(R.id.checkedTextView);
 
         checkedTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +80,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
                 checkedTextView.setChecked(!checked);
             }
         });
-
+*/
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

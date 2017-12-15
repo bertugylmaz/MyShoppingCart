@@ -51,19 +51,6 @@
         android:layout_gravity="center"
         android:layout_marginRight="10dp"
         />
-    <CheckedTextView
-        android:id="@+id/checkedTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-        android:gravity="center"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingRight="12dp"
-        android:paddingEnd="12dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/midnight_blue" />
 
 
 </LinearLayout>
