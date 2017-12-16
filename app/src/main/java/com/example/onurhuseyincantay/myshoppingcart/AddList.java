@@ -1,11 +1,9 @@
 package com.example.onurhuseyincantay.myshoppingcart;
 
 import android.annotation.SuppressLint;
-import android.service.autofill.Dataset;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,9 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
+import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class AddList extends AppCompatActivity {
 
@@ -30,54 +29,61 @@ public class AddList extends AppCompatActivity {
     private EditText productNameEditText;
     private EditText productCountEditText;
     private String selectedType;
-
+    private ShoppingList listClass;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_list);
+        try{
+            setContentView(R.layout.activity_add_list);
+            Bundle data = getIntent().getExtras();
+            listClass = (ShoppingList) data.getParcelable("shoppingList");
+            Log.d("Liste Adı Gocuum", "onCreate: "+listClass.getName());
+            toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+            addProductButton = (Button)findViewById(R.id.addProductButton);
+            typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
+            productNameEditText = (EditText)findViewById(R.id.productNameEditText);
+            productCountEditText = (EditText)findViewById(R.id.productCountEditText);
 
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        addProductButton = (Button)findViewById(R.id.addProductButton);
-        typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
-        productNameEditText = (EditText)findViewById(R.id.productNameEditText);
-        productCountEditText = (EditText)findViewById(R.id.productCountEditText);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+            typesDataForSpinner =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
+            typesDataForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            typeSpinner.setAdapter(typesDataForSpinner);
+            final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.ItemLists);
+            addProductButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        typesDataForSpinner =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
-        typesDataForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(typesDataForSpinner);
-        final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.ItemLists);
-        addProductButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    if(productCountEditText.getText().toString().equals("") || productNameEditText.getText().toString().equals("") ){
+                        Toast wrongToast = Toast.makeText(getApplicationContext(), "Boş alanları doldurunuzz", Toast.LENGTH_LONG);
+                        wrongToast.show();
+                    }else {
+                        String id = DataService.ds.itemsRef.push().getKey();
+                        String weight = productCountEditText.getText().toString() +" "+ typeSpinner.getSelectedItem().toString();
+                        String name = productNameEditText.getText().toString();
 
-                if(productCountEditText.getText().toString().equals("") || productNameEditText.getText().toString().equals("") ){
-                    Toast wrongToast = Toast.makeText(getApplicationContext(), "Boş alanları doldurunuzz", Toast.LENGTH_LONG);
-                    wrongToast.show();
-                }else {
-                    String id = DataService.ds.itemsRef.push().getKey();
-                    String weight = productCountEditText.getText().toString() +" "+ typeSpinner.getSelectedItem().toString();
-                    String name = productNameEditText.getText().toString();
+                        Item item = new Item(id,name,weight);
 
-                    Item item = new Item(id,name,weight);
+                        addItemAction(item);
 
-                    addItemAction(item);
+                        shoppingCartAdapter.notifyDataSetChanged();
 
-                    shoppingCartAdapter.notifyDataSetChanged();
+                        productNameEditText.setText("");
+                        productCountEditText.setText("");
 
-                    productNameEditText.setText("");
-                    productCountEditText.setText("");
-
-                    Toast completedToast = Toast.makeText(getApplicationContext(), "Ürün Eklendi", Toast.LENGTH_LONG);
-                    completedToast.show();
+                        Toast completedToast = Toast.makeText(getApplicationContext(), "Ürün Eklendi", Toast.LENGTH_LONG);
+                        completedToast.show();
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.e("Err", e.getMessage());
+        }
+
     }
 
     @Override
