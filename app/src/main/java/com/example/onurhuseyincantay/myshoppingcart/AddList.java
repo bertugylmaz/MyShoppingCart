@@ -44,7 +44,6 @@ public class AddList extends AppCompatActivity {
             typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
             productNameEditText = (EditText)findViewById(R.id.productNameEditText);
             productCountEditText = (EditText)findViewById(R.id.productCountEditText);
-
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,7 +52,7 @@ public class AddList extends AppCompatActivity {
             typesDataForSpinner =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
             typesDataForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             typeSpinner.setAdapter(typesDataForSpinner);
-            final ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.ItemLists);
+
             addProductButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -69,8 +68,6 @@ public class AddList extends AppCompatActivity {
                         Item item = new Item(id,name,weight);
 
                         addItemAction(item);
-
-                        shoppingCartAdapter.notifyDataSetChanged();
 
                         productNameEditText.setText("");
                         productCountEditText.setText("");
@@ -91,6 +88,7 @@ public class AddList extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
 
     public void addItemAction(Item item){
         DataService.ds.itemsRef.child(item.getItemId()).updateChildren(item.toMap());

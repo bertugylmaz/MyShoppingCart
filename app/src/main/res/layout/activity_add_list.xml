@@ -37,16 +37,6 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/cartNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="30dp"
-            android:inputType="textPersonName"
-            android:hint="@string/cart_name"
-            />
 
         <EditText
             android:id="@+id/productNameEditText"

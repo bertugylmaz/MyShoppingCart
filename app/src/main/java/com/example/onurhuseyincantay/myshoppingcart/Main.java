@@ -1,7 +1,9 @@
 package com.example.onurhuseyincantay.myshoppingcart;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.service.autofill.Dataset;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,28 +19,58 @@ import android.widget.ListView;
 
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class Main extends AppCompatActivity {
 
     private EditText getNameCartEditText;
     private ListView listView;
     ShoppingCartAdapter shoppingCartAdapter;
-    ShoppingList shoppingList;
+    List<ShoppingList> shoppingLists = new ArrayList<ShoppingList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setTitle(R.string.app_name);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        ValueEventListener shoppingListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot shoppingListSnapshot : dataSnapshot.getChildren()){
+                    String name = (String) shoppingListSnapshot.child("Name").getValue();
+                    String id = (String)  shoppingListSnapshot.getKey().toString();
+                 //   Log.d("S.a", "onDataChange: name :"+name+"İd : "+id);
+                    shoppingLists.add(new ShoppingList(id,name));
+
+                    for(ShoppingList item : shoppingLists){
+
+                        Log.d("Shoppinglisteleri ", "Onur :"+item.getName());
+                    }
+
+                }
+                shoppingCartAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Data değiştirelemdi", "loadPost:onCancelled", databaseError.toException());
+
+            }
+        };
+        DataService.ds.shoppingListsRef.addValueEventListener(shoppingListener);
         listView = (ListView) findViewById(R.id.list_view);
-        shoppingCartAdapter = new ShoppingCartAdapter(this, GenericShoppingCart.ItemLists);
+         shoppingCartAdapter = new ShoppingCartAdapter(this,shoppingLists);
+
     }
 
     @Override
@@ -59,12 +91,8 @@ public class Main extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case R.id.add_shopping_cart:
-
-                //Intent addShoppingCartIntent = new Intent(Main.this, AddList.class);
-                //startActivity(addShoppingCartIntent);
-
                 showAlertView();
-
+               shoppingCartAdapter.notifyDataSetChanged();
                 return true;
             case R.id.logout:
                 DataService.ds.mAuth.signOut();
@@ -90,12 +118,16 @@ public class Main extends AppCompatActivity {
                  String id =  DataService.ds.shoppingListsRef.push().getKey();
                 Log.d("liste adı", "Onur : "+name);
                 Log.d("liste id", id);
-               shoppingList = new ShoppingList(id,name);
+                ShoppingList shoppingList = new ShoppingList(id,name);
                 Intent addListIntent = new Intent( Main.this, AddList.class );
                 addListIntent.putExtra( "shoppingList",shoppingList);
-                startActivity(addListIntent);
+                DataService.ds.shoppingListsRef.child(shoppingList.getListId()).child("Name").setValue(shoppingList.getName());
+                shoppingLists.clear();
+
+//                startActivity(addListIntent);
             }
         });
+
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -107,4 +139,5 @@ public class Main extends AppCompatActivity {
         AlertDialog alrt = alert.create();
         alrt.show();
     }
+
 }

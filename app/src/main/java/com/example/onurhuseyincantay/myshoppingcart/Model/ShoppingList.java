@@ -12,7 +12,6 @@ import java.util.List;
 public class ShoppingList implements Parcelable {
     private String ListId;
     private String name;
-    private List<String> Items;
 
     public ShoppingList(String listId, String name) {
         ListId = listId;
@@ -20,9 +19,6 @@ public class ShoppingList implements Parcelable {
     }
     public String getListId() {
         return ListId;
-    }
-    public List<String> getItems() {
-        return Items;
     }
     public String getName() {
         return name;
