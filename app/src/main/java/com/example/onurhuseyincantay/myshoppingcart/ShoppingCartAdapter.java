@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
+import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
 
 import java.util.List;
 
@@ -71,9 +72,6 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
         nameTextView.setText(item.getName());
 
-
-
-
         /*checkedTextView = (CheckedTextView)row.findViewById(R.id.checkedTextView);
 
         checkedTextView.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +97,11 @@ public class ShoppingCartAdapter extends BaseAdapter {
                         .setMessage("Are you sure you want to delete this entry?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                ShoppingLists.remove(position);
-                                me.notifyDataSetChanged();
+                                ShoppingList selected;
+                                selected = ShoppingLists.get(position);
+
+                                DataService.ds.removeSelectedCart(selected.getListId());
+                                ShoppingLists.clear();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -135,7 +136,6 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
     public boolean alertDialog(View view){
         final boolean[] isDelete = new boolean[1];
-
 
         return isDelete[0];
     }

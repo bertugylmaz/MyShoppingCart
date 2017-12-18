@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -71,6 +72,14 @@ public class Main extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view);
          shoppingCartAdapter = new ShoppingCartAdapter(this,shoppingLists);
 
+         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                 Intent cartInfoIntent = new Intent( Main.this, CartInfo.class );
+                 startActivity(cartInfoIntent);
+             }
+         });
+
     }
 
     @Override
@@ -124,7 +133,7 @@ public class Main extends AppCompatActivity {
                 DataService.ds.shoppingListsRef.child(shoppingList.getListId()).child("Name").setValue(shoppingList.getName());
                 shoppingLists.clear();
 
-//                startActivity(addListIntent);
+                startActivity(addListIntent);
             }
         });
 

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,7 +40,7 @@ public class AddList extends AppCompatActivity {
             setContentView(R.layout.activity_add_list);
             Bundle data = getIntent().getExtras();
             listClass = (ShoppingList) data.getParcelable("shoppingList");
-            Log.d("Liste Adı Gocuum", "onCreate: "+listClass.getName());
+            //Log.d("Liste Adı Gocuum", "onCreate: "+listClass.getName());
             toolbar = (Toolbar) findViewById(R.id.my_toolbar);
             addProductButton = (Button)findViewById(R.id.addProductButton);
             typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
@@ -80,7 +82,13 @@ public class AddList extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("Err", e.getMessage());
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return true;
     }
 
     @Override
@@ -88,7 +96,6 @@ public class AddList extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
 
     public void addItemAction(Item item){
         DataService.ds.itemsRef.child(item.getItemId()).updateChildren(item.toMap());

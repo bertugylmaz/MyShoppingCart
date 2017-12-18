@@ -18,6 +18,8 @@ public class DataService {
     public DatabaseReference shoppingListsRef = database.getReference(Parameters.ShoppingLists.toString());
     public DatabaseReference userRef = database.getReference(Parameters.Users.toString());
 
-
+    public void removeSelectedCart(String id){
+        shoppingListsRef.child(id).removeValue();
+    }
 
 }
