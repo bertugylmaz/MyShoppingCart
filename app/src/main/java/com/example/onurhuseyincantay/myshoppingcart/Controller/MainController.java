@@ -1,9 +1,7 @@
-package com.example.onurhuseyincantay.myshoppingcart;
+package com.example.onurhuseyincantay.myshoppingcart.Controller;
 
-import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.service.autofill.Dataset;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,16 +18,16 @@ import android.widget.ListView;
 
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
+import com.example.onurhuseyincantay.myshoppingcart.R;
+import com.example.onurhuseyincantay.myshoppingcart.Adapter.ShoppingCartAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Main extends AppCompatActivity {
+public class MainController extends AppCompatActivity {
 
     private EditText getNameCartEditText;
     private ListView listView;
@@ -75,7 +73,7 @@ public class Main extends AppCompatActivity {
          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 Intent cartInfoIntent = new Intent( Main.this, CartInfo.class );
+                 Intent cartInfoIntent = new Intent( MainController.this, CartInfoController.class );
                  startActivity(cartInfoIntent);
              }
          });
@@ -124,12 +122,13 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String name = getNameCartEditText.getText().toString();
-                 String id =  DataService.ds.shoppingListsRef.push().getKey();
-                Log.d("liste adı", "Onur : "+name);
-                Log.d("liste id", id);
+                String id =  DataService.ds.shoppingListsRef.push().getKey();
+
                 ShoppingList shoppingList = new ShoppingList(id,name);
-                Intent addListIntent = new Intent( Main.this, AddList.class );
-                addListIntent.putExtra( "shoppingList",shoppingList);
+
+                Intent addListIntent = new Intent( MainController.this, AddListController.class );
+                addListIntent.putExtra( "shoppingList",shoppingList.getListId());
+
                 DataService.ds.shoppingListsRef.child(shoppingList.getListId()).child("Name").setValue(shoppingList.getName());
                 shoppingLists.clear();
 

@@ -1,4 +1,4 @@
-package com.example.onurhuseyincantay.myshoppingcart;
+package com.example.onurhuseyincantay.myshoppingcart.Adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,9 +14,9 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
-import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
+import com.example.onurhuseyincantay.myshoppingcart.R;
 
 import java.util.List;
 

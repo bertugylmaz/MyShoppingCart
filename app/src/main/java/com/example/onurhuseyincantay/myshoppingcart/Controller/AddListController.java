@@ -1,4 +1,4 @@
-package com.example.onurhuseyincantay.myshoppingcart;
+package com.example.onurhuseyincantay.myshoppingcart.Controller;
 
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +17,11 @@ import android.widget.Toast;
 import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
+import com.example.onurhuseyincantay.myshoppingcart.R;
 
 import java.util.HashMap;
 
-public class AddList extends AppCompatActivity {
+public class AddListController extends AppCompatActivity {
 
     private String[] types={"Kg","Litre","Adet"};
     private Spinner typeSpinner;
@@ -39,13 +40,14 @@ public class AddList extends AppCompatActivity {
         try{
             setContentView(R.layout.activity_add_list);
             Bundle data = getIntent().getExtras();
+
             listClass = (ShoppingList) data.getParcelable("shoppingList");
-            //Log.d("Liste Adı Gocuum", "onCreate: "+listClass.getName());
             toolbar = (Toolbar) findViewById(R.id.my_toolbar);
             addProductButton = (Button)findViewById(R.id.addProductButton);
             typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
             productNameEditText = (EditText)findViewById(R.id.productNameEditText);
             productCountEditText = (EditText)findViewById(R.id.productCountEditText);
+
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

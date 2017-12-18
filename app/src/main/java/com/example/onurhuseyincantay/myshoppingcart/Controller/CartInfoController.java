@@ -1,11 +1,13 @@
-package com.example.onurhuseyincantay.myshoppingcart;
+package com.example.onurhuseyincantay.myshoppingcart.Controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.support.v7.widget.Toolbar;
 
-public class CartInfo extends AppCompatActivity {
+import com.example.onurhuseyincantay.myshoppingcart.R;
+
+public class CartInfoController extends AppCompatActivity {
 
     private ListView listView;
     private Toolbar toolbar;
