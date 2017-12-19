@@ -83,6 +83,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             }
         });
 */
+
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

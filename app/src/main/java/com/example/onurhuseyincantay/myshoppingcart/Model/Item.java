@@ -40,4 +40,11 @@ public class Item {
         result.put("Weight", Weight);
         return result;
     }
+
+    @Exclude
+    public Map<String, Object> exportID() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put(ItemId,1 );
+        return result;
+    }
 }

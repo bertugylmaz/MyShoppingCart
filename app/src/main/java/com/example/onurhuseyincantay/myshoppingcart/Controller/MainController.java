@@ -51,12 +51,12 @@ public class MainController extends AppCompatActivity {
                     String id = (String)  shoppingListSnapshot.getKey().toString();
                  //   Log.d("S.a", "onDataChange: name :"+name+"İd : "+id);
                     shoppingLists.add(new ShoppingList(id,name));
-
+/*
                     for(ShoppingList item : shoppingLists){
 
                         Log.d("Shoppinglisteleri ", "Onur :"+item.getName());
                     }
-
+*/
                 }
                 shoppingCartAdapter.notifyDataSetChanged();
             }
@@ -66,9 +66,11 @@ public class MainController extends AppCompatActivity {
 
             }
         };
+
         DataService.ds.shoppingListsRef.addValueEventListener(shoppingListener);
         listView = (ListView) findViewById(R.id.list_view);
-         shoppingCartAdapter = new ShoppingCartAdapter(this,shoppingLists);
+        shoppingCartAdapter = new ShoppingCartAdapter(this,shoppingLists);
+        listView.setAdapter(shoppingCartAdapter);
 
          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              @Override
@@ -83,9 +85,9 @@ public class MainController extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        listView.setAdapter(shoppingCartAdapter);
         shoppingCartAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,7 +129,7 @@ public class MainController extends AppCompatActivity {
                 ShoppingList shoppingList = new ShoppingList(id,name);
 
                 Intent addListIntent = new Intent( MainController.this, AddListController.class );
-                addListIntent.putExtra( "shoppingList",shoppingList.getListId());
+                addListIntent.putExtra( "shoppingListId",shoppingList.getListId().toString());
 
                 DataService.ds.shoppingListsRef.child(shoppingList.getListId()).child("Name").setValue(shoppingList.getName());
                 shoppingLists.clear();

@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 public class DataService {
     private DataService() {
     }
@@ -22,4 +24,7 @@ public class DataService {
         shoppingListsRef.child(id).removeValue();
     }
 
+    public void addItemOnContainer(String listId, Map<String, Object> itemId){
+        containerRef.child(mAuth.getCurrentUser().getUid().toString()).child(listId).updateChildren(itemId);
+    }
 }
