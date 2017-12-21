@@ -1,6 +1,8 @@
 package com.example.onurhuseyincantay.myshoppingcart.Network;
 
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +26,14 @@ public class DataService {
         shoppingListsRef.child(id).removeValue();
     }
 
-    public void addItemOnContainer(String listId, Map<String, Object> itemId){
-        containerRef.child(mAuth.getCurrentUser().getUid().toString()).child(listId).updateChildren(itemId);
+    public void removeSelectedItem(String itemId,String cartId){
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        containerRef.child(userID).child(cartId).child(itemId).removeValue();
+        itemsRef.child(itemId).removeValue();
+    }
+
+    public void addItemOnContainer(String cartId, Map<String, Object> itemId){
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        containerRef.child(userID).child(cartId).updateChildren(itemId);
     }
 }

@@ -37,20 +37,20 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/ListView"
-        android:layout_margin="20dp">
-
-        <Button
+    <!--    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:text="@string/clear_list"
-            android:textColor="@color/colorPrimary"/>
+            android:orientation="vertical"
+            android:layout_below="@id/ListView"
+            android:layout_margin="20dp">
 
-    </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:text="@string/clear_list"
+                android:textColor="@color/colorPrimary"/>
 
+        </LinearLayout>
+    -->
 </RelativeLayout>

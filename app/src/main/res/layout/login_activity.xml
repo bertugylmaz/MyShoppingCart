@@ -8,15 +8,16 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/back">
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        >
     </ImageView>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        >
+        android:layout_centerVertical="true">
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +25,12 @@
             android:id="@+id/login_email"
             android:hint="Email"
             android:singleLine="true"
+            android:background="@layout/login_edittext"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="100dp"
             />
         <EditText
             android:layout_width="wrap_content"
@@ -33,12 +38,13 @@
             android:width="250dp"
             android:hint="Password"
             android:singleLine="true"
+            android:background="@layout/login_edittext"
             android:id="@+id/login_passsword"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
+            android:padding="10dp"
             />
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -46,18 +52,24 @@
             android:layout_margin="10dp"
             >
             <Button
+                android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giriş"
                 android:layout_weight="1"
-                android:id="@+id/login_button"
+                android:background="@layout/login_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
                 />
             <Button
+                android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Kayıt Ol"
-                android:id="@+id/register_button"
+                android:background="@layout/login_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
                 />
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
 import com.example.onurhuseyincantay.myshoppingcart.Model.ShoppingList;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
 import com.example.onurhuseyincantay.myshoppingcart.R;
@@ -21,22 +22,21 @@ import com.example.onurhuseyincantay.myshoppingcart.R;
 import java.util.List;
 
 /**
- * Created by Bertug on 06/12/2017.
+ * Created by Bertug on 19/12/2017.
  */
 
-public class ShoppingCartAdapter extends BaseAdapter {
-
+public class ItemListAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
-    private List<ShoppingList> ShoppingLists;
+    private List<Item> ItemLists;
 
-    public ShoppingCartAdapter(Activity activity, List<ShoppingList> shoppinglists){
+    public ItemListAdapter(Activity activity, List<Item> itemList){
         layoutInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ShoppingLists = shoppinglists;
+        ItemLists = itemList;
     }
 
     @Override
     public int getCount(){
-        return ShoppingLists.size();
+        return ItemLists.size();
     }
 
     @Override
@@ -53,30 +53,22 @@ public class ShoppingCartAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View row;
         TextView nameTextView;
+        TextView countTextView;
         Button removeButton;
-        ShoppingList item;
+        Item item;
         final int position = i;
-        final ShoppingCartAdapter me = this;
-        //final CheckedTextView checkedTextView;
+
+        final ItemListAdapter me = this;
 
         row = layoutInflater.inflate(R.layout.shopping_list_cell, null);
-        item = ShoppingLists.get(i);
+        item = ItemLists.get(position);
 
         nameTextView = (TextView)row.findViewById(R.id.nameTextView);
+        countTextView = (TextView)row.findViewById(R.id.countTextView);
         removeButton = (Button)row.findViewById(R.id.removeButton);
 
         nameTextView.setText(item.getName());
-
-        /*checkedTextView = (CheckedTextView)row.findViewById(R.id.checkedTextView);
-
-        checkedTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Boolean checked;
-                checked = checkedTextView.isChecked();
-                checkedTextView.setChecked(!checked);
-            }
-        });*/
+        countTextView.setText(item.getWeight());
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +84,11 @@ public class ShoppingCartAdapter extends BaseAdapter {
                         .setMessage("Are you sure you want to delete this entry?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                ShoppingList selected;
-                                selected = ShoppingLists.get(position);
+                                Item selected;
+                                selected = ItemLists.get(position);
 
-                                DataService.ds.removeSelectedCart(selected.getListId());
-                                ShoppingLists.clear();
+                                DataService.ds.removeSelectedItem(selected.getItemId().toString(),selected.getCartId().toString());
+                                ItemLists.clear();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -120,12 +112,12 @@ public class ShoppingCartAdapter extends BaseAdapter {
         return layoutInflater;
     }
 
-    public void setShoppingCartList(List<ShoppingList> itemList) {
-        this.ShoppingLists= itemList;
+    public void setItemList(List<Item> itemList) {
+        this.ItemLists = itemList;
     }
 
-    public List<ShoppingList> getShoppingCartList() {
-        return ShoppingLists;
+    public List<Item> getItemLists() {
+        return ItemLists;
     }
 
     public boolean alertDialog(View view){

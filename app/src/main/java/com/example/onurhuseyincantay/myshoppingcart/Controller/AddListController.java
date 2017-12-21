@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.example.onurhuseyincantay.myshoppingcart.Helper.Constants;
 import com.example.onurhuseyincantay.myshoppingcart.Model.Item;
 import com.example.onurhuseyincantay.myshoppingcart.Network.DataService;
 import com.example.onurhuseyincantay.myshoppingcart.R;
@@ -72,11 +71,10 @@ public class AddListController extends AppCompatActivity {
                         String weight = productCountEditText.getText().toString() +" "+ typeSpinner.getSelectedItem().toString();
                         String name = productNameEditText.getText().toString();
 
-                        Item item = new Item(id,name,weight);
+                        Log.d("TAG", "onClick: " + listId);
+                        Item item = new Item(id,listId,name,weight);
 
                         addItemAction(item);
-
-                        DataService.ds.addItemOnContainer(listId,item.exportID());
 
                         productNameEditText.setText("");
                         productCountEditText.setText("");
@@ -112,6 +110,6 @@ public class AddListController extends AppCompatActivity {
 
     public void addItemAction(Item item){
         DataService.ds.itemsRef.child(item.getItemId()).updateChildren(item.toMap());
+        DataService.ds.addItemOnContainer(listId,item.exportID());
     }
-
 }

@@ -51,7 +51,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="10dp"
         android:focusable="false"
-        android:clickable="false"
+        android:clickable="false "
         />
 
 
